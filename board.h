@@ -26,6 +26,11 @@ class Board{
 
     public:
 
+    // lecture of content of the cell 
+    Marks at(int row, int col){
+        return board[row][col];
+    }
+
     bool adjacentCells(int row, int col , int new_row, int new_col){
         return (abs(new_row - row) + abs(new_col - col) ) == 1 ? true : false;
     }
