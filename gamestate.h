@@ -64,6 +64,10 @@ class GameState {
         return board; 
     }
 
+    void setBoard(Board b) {
+        board = b;
+    }
+
     Marks getCurrentPlayer(){ 
         return currentPlayer; 
     }
@@ -102,6 +106,38 @@ class GameState {
     void printTitle() {
         std::cout << Color::Yellow << "Triqui movil" << Color::Reset << std::endl;
     }
+    void printInstructions(){
+        std::cout << "Bienvenido a Triqui movil!\nEn cada turno puedes poner una ficha nueva o mover una existente a una casilla libre adyacente.\n";
+        std::cout << "Gana el primer jugador en completar 3 en raya!\n\n";
+        std::cout << "Tablero de referencia: \n";
+       
+     bool unicode = terminalSupportsUnicode();
+        std::string top = unicode ? "    ┌───┬───┬───┐\n" : "    +---+---+---+\n";
+        std::string mid = unicode ? "    ├───┼───┼───┤\n" : "    +---+---+---+\n";
+        std::string bottom = unicode ? "    └───┴───┴───┘\n" : "    +---+---+---+\n";
+        std::string bar = unicode ? "│" : "|";
+
+        std::cout << top;
+
+        for (int i = 0; i <3; i++) {
+            std::cout << "    " << bar << " ";
+            for (int j = 0; j < 3; j++) {
+                std::cout << (i*3 + j + 1) << " " << bar << " ";
+            }
+            std::cout << "\n";
+            if (i < 2) {
+                std::cout << mid;
+            }
+        }
+
+        std::cout << bottom << std::endl;
+
+        std::cout << "En su turno, puede seleccionar alguna de las siguientes opciones:\n";
+        std::cout << "1 - Poner ficha nueva\n2 - Mover una ficha\n0 - Salir\n\n\n";
+
+
+}
+
     void printBoard() {
         bool unicode = terminalSupportsUnicode();
         std::string top = unicode ? "    ┌───┬───┬───┐\n" : "    +---+---+---+\n";
@@ -123,7 +159,7 @@ class GameState {
         }
         std::cout << bottom;
 
-        std::cout << Color::Yellow<<"jugada # "<<turnCount<<Color::Reset<<std::endl;
+        std::cout << Color::Yellow<<"\nJugada #"<<turnCount<<Color::Reset<<std::endl;
         std::cout << "Turno del jugador: " << symbol(currentPlayer) << std::endl;
         std::cout << "Jugador X: " << countMarks(X) << " | Jugador O: " << countMarks(O) << std::endl;
     }
@@ -141,7 +177,4 @@ class GameState {
 };
 
 
-#endif 
-
-
-
+#endif
