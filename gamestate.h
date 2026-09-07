@@ -133,7 +133,7 @@ class GameState {
         std::cout << bottom << std::endl;
 
         std::cout << "En su turno, puede seleccionar alguna de las siguientes opciones:\n";
-        std::cout << "1 - Poner ficha nueva\n2 - Mover una ficha\n0 - Salir\n\n\n";
+        std::cout << "1 - Poner ficha nueva\n2 - Mover una ficha\n0 - Salir\n\n";
 
 
 }
@@ -145,7 +145,7 @@ class GameState {
         std::string bottom = unicode ? "    └───┴───┴───┘\n" : "    +---+---+---+\n";
         std::string bar = unicode ? "│" : "|";
 
-        std::cout << top;
+        std::cout << std::endl << top;
 
         for (int i = 0; i <3; i++) {
             std::cout << "    " << bar << " ";
@@ -159,7 +159,7 @@ class GameState {
         }
         std::cout << bottom;
 
-        std::cout << Color::Yellow<<"\nJugada #"<<turnCount<<Color::Reset<<std::endl;
+        std::cout << Color::Yellow<<"Jugada #"<<turnCount<<Color::Reset<<std::endl;
         std::cout << "Turno del jugador: " << symbol(currentPlayer) << std::endl;
         std::cout << "Jugador X: " << countMarks(X) << " | Jugador O: " << countMarks(O) << std::endl;
     }
