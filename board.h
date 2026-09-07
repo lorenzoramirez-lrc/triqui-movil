@@ -2,7 +2,6 @@
 #define BOARD_H 
 #include <array>
 #include <cmath>
-#include <iostream>
 
 enum Marks{
     EMPTY,
@@ -121,28 +120,6 @@ class Board{
         Xs = Os = 0;
 
         return EMPTY;
-    }
-    
-
-    void print() {
-        for (int i = 0; i < BOARD_SIZE; i++) {
-            for (int j = 0; j < BOARD_SIZE; j++) {
-                char symbol = ' ';
-
-                if (board[i][j] == X) symbol = 'X';
-                else if (board[i][j] == O) symbol = 'O';
-
-                std::cout << " " << symbol << " ";
-
-                if (j < BOARD_SIZE - 1)
-                    std::cout << "|";
-            }
-
-            std::cout << "\n";
-
-            if (i < BOARD_SIZE - 1)
-                std::cout << "---+---+---\n";
-        }
     }
 
 };

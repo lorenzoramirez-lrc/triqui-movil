@@ -1,6 +1,22 @@
 #include "board.h"
 #include <iostream>
 #include <string>
+#include <cstdlib>
+#include <cctype>
+
+
+bool terminalSupportsUnicode() {
+    const char* vars[] = {"LC_ALL", "LC_CTYPE", "LANG"};
+    for (const char* var : vars) {
+        const char* value = std::getenv(var);
+        if (value != nullptr && *value != '\0') {
+            std::string s(value);
+            for (char& c : s) c = std::tolower(c);
+            return s.find("utf") != std::string::npos;
+        }
+    }
+    return false;
+}
 // terminal color 
 namespace Color {
     std::string Red = "\033[1;31m"; // for player X 
@@ -84,19 +100,25 @@ void printTitle() {
     std::cout << Color::Yellow << "Triqui movil" << Color::Reset << std::endl;
 }
 void printBoard() {
-    std::cout << "    ┌───┬───┬───┐\n";
+    bool unicode = terminalSupportsUnicode();
+    std::string top = unicode ? "    ┌───┬───┬───┐\n" : "    +---+---+---+\n";
+    std::string mid = unicode ? "    ├───┼───┼───┤\n" : "    +---+---+---+\n";
+    std::string bottom = unicode ? "    └───┴───┴───┘\n" : "    +---+---+---+\n";
+    std::string bar = unicode ? "│" : "|";
+
+    std::cout << top;
 
     for (int i = 0; i <3; i++) {
-        std::cout << "    │ ";
+        std::cout << "    " << bar << " ";
         for (int j = 0; j < 3; j++) {
-            std::cout << symbol(board.at(i,j)) << " │ ";
+            std::cout << symbol(board.at(i,j)) << " " << bar << " ";
         }
         std::cout << "\n";
         if (i < 2) {
-            std::cout << "    ├───┼───┼───┤\n";
+            std::cout << mid;
         }
     }
-    std::cout << "    └───┴───┴───┘\n";
+    std::cout << bottom;
 
     std::cout << Color::Yellow<<"jugada # "<<turnCount<<Color::Reset<<std::endl;
     std::cout << "Turno del jugador: " << symbol(currentPlayer) << std::endl;
