@@ -1,3 +1,7 @@
+#ifndef MINMAX_H
+#define MINMAX_H
+
+
 #include "board.h"
 #include <vector>
 
@@ -134,3 +138,6 @@ class MinMax{
 
 
 };
+
+
+#endif
