@@ -55,7 +55,7 @@ class MinMax{
         std::vector<Board> children;
 
         
-        int limit = (player == X) ? 5 : 4;
+        int limit = 5;
         bool canPlace = countMarks(board, player) < limit;
 
         for (int i=0; i<3; i++){
