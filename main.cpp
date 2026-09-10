@@ -28,9 +28,18 @@ int main() {
 		if(!game.isIAPlayerTurn()) {
 			int jugada;
 			std::cout << "Seleccione su jugada: ";
-			std::cin >> jugada;
+			if(!(std::cin >> jugada)) {
+				std::cin.clear();
+				std::cin.ignore(1000, '\n');
+				std::cout << "Entrada invalida, intenta de nuevo.\n";
+				continue;
+			}
 
 			if(jugada == 1) {
+				if(!game.canPlaceMore()) {
+					std::cout << "Ya pusiste todas tus fichas, solo puedes mover.\n";
+					continue;
+				}
 				int pos;
 				std::cout << "Ingrese casilla en la que poner: ";
 				std::cin >> pos;
@@ -52,7 +61,7 @@ int main() {
 				}
 			} else {
 				std::cout << "Muchas gracias por jugar!\n";
-				break;
+				return 0;
 			}
 
 		} else {

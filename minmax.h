@@ -41,8 +41,22 @@ class MinMax{
         return value;
     }
 
+    int countMarks (Board board, Marks player){
+        int count = 0;
+        for (int i=0; i<3; i++){
+            for (int j=0; j<3; j++){
+                if (board.at(i, j) == player) count++;
+            }
+        }
+        return count;
+    }
+
     std::vector<Board> getChildren (Board board, Marks player){
         std::vector<Board> children;
+
+        
+        int limit = (player == X) ? 5 : 4;
+        bool canPlace = countMarks(board, player) < limit;
 
         for (int i=0; i<3; i++){
             for (int j=0; j<3; j++){
@@ -58,7 +72,7 @@ class MinMax{
                         }   
                     }
                     
-                }else if (board.at(i, j) == EMPTY){
+                }else if (canPlace && board.at(i, j) == EMPTY){
                     Board copy = board;
                     copy.addMark(i, j, player);
                     children.push_back(copy);
@@ -75,6 +89,12 @@ class MinMax{
         }
 
         std::vector<Board> children = getChildren(board, player);
+
+       
+        if (children.empty()){
+            return heuristic(board);
+        }
+
         std::vector<Board>::iterator it = children.begin();
 
         if (max){
@@ -121,6 +141,11 @@ class MinMax{
     Board minmaxAlgorithm (Board board){
         std::vector<Board> children_ai;
         children_ai = getChildren (board, ai);
+
+        if (children_ai.empty()){
+            return board;
+        }
+
         std::vector<Board>::iterator it = children_ai.begin();
         Board best_move = *(children_ai.begin());
         int best_value = minimax(best_move, opponent, 1, false);

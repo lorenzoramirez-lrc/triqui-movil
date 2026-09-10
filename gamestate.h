@@ -80,7 +80,16 @@ class GameState {
         turnCount++;
     }
 
+    
+    bool canPlaceMore(){
+        int limit = (currentPlayer == X) ? 5 : 4;
+        return countMarks(currentPlayer) < limit;
+    }
+
     bool play(int row,int col){
+        if(!canPlaceMore()){
+            return false;
+        }
         if(!board.addMark(row,col,currentPlayer)){
             return false;
         }
