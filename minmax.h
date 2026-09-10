@@ -8,7 +8,7 @@
 class MinMax{
     Marks ai;
     Marks opponent;
-    const int MAX_DEPTH = 2;
+    const int MAX_DEPTH = 6;
 
     int heuristic (Board board){
         int value = 0;
