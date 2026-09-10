@@ -108,7 +108,8 @@ class GameState {
     }
     void printInstructions(){
         std::cout << "Bienvenido a Triqui movil!\nEn cada turno puedes poner una ficha nueva o mover una existente a una casilla libre adyacente.\n";
-        std::cout << "Gana el primer jugador en completar 3 en raya!\n\n";
+        std::cout << "Gana el primer jugador en completar 3 en raya!\n";
+        std::cout << "El turno que comience siempre sera la X, sea la IA o el usuario.\n\n";
         std::cout << "Tablero de referencia: \n";
        
      bool unicode = terminalSupportsUnicode();
@@ -159,7 +160,7 @@ class GameState {
         }
         std::cout << bottom;
 
-        std::cout << Color::Yellow<<"Jugada #"<<turnCount<<Color::Reset<<std::endl;
+        std::cout << Color::Yellow<<"Jugada #"<<turnCount-1<<Color::Reset<<std::endl;
         std::cout << "Turno del jugador: " << symbol(currentPlayer) << std::endl;
         std::cout << "Jugador X: " << countMarks(X) << " | Jugador O: " << countMarks(O) << std::endl;
     }
